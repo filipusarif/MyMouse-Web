@@ -1,14 +1,8 @@
 <?php
 session_start();
+require 'koneksi.php';
 
-
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $myDB = "mymouse";
-    
-    $conn = new mysqli($servername, $username, $password, $myDB);
+    $conn = koneksi1();    
     if($conn -> connect_error) {
         die("connection failed" . $conn->connect_error);
     };

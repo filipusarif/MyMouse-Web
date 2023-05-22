@@ -11,6 +11,7 @@ File : masuk.php
     session_start();
     require "../php/fungsi.php";
 
+    // Cek jika sudah masuk Mulai
     if(isset($_SESSION['user'])){
         header("location: ../");
         exit;
@@ -20,22 +21,25 @@ File : masuk.php
         header("location: ../");
         exit;
     }
+    // Cek Jika Sudah Masuk Selesai
 
+    // isset button masuk Mulai
     if(isset($_POST['masuk'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $koneksi = konek();
         $status = "admin";
-        // $admin = mysqli_query($koneksi, "SELECT * FROM tbpengguna WHERE status = '$status'");
+
+        // Cek ada username di database Mulai
         $ambil = mysqli_query($koneksi, "SELECT * FROM tbpengguna WHERE username = '$username'");
         $temp = NULL;
         if(mysqli_num_rows($ambil) === 1){
             $data = mysqli_fetch_assoc($ambil);
-            // $dataAdmin = mysqli_fetch_assoc($admin);
             $temp =$data['status'];
         }
-        // var_dump($dataAdmin['email']);
+        // Cek ada username di database selesai
 
+        // Cek Masuk Admin / User Mulai
         if ($status == $temp) {
             if(mysqli_num_rows($ambil) === 1){
                 //cek password
@@ -63,10 +67,10 @@ File : masuk.php
                 $erorS = true;
             }
         }
-
-        //cek username
+        // Cek Masuk Admin / user selesai
         
     }
+    // isset button masuk selesai
 
 ?>
 
@@ -80,59 +84,73 @@ File : masuk.php
     <link rel="icon" href="../gambar/miniLogo.png">
     <title>MyMouse ~ Masuk</title>
 </head>
+
 <body>
+    <!-- Container Mulai -->
     <div class="container">
-            <span class="bg"></span>
-            <form action="" method="post" class="container-log">  
-                <div class="log">
-                    <a href="../">
-                        <img src="../gambar/logoWeb.png" alt="Mymouse">
-                    </a>
-                    <a href="../toko/">
-                        <img src="../gambar/Union.png" alt="home">
-                    </a>
-                </div>
-                <h1>Masuk</h1>
+        <!-- Background Mouse -->
+        <span class="bg"></span>
+
+        <!-- Wrapper Masuk Mulai -->
+        <form action="" method="post" class="container-log">  
+            <!-- Header Mulai -->
+            <div class="log">
+                <a href="../">
+                    <img src="../gambar/logoWeb.png" alt="Mymouse">
+                </a>
+                <a href="../toko/">
+                    <img src="../gambar/Union.png" alt="home">
+                </a>
+            </div>
+            <!-- Header Selesai -->
+
+            <h1>Masuk</h1>
                 
-                <p>Selamat datang di MyMouse</p>
-                <!-- <label for="username" >Username</label><br> -->
-                <div class="div-user">
-                    <input type="text" name="username" id="username" required class="label">
-                    <span>Username</span>
-                </div>
-                <!-- <label for="password">Password</label><br> -->
-                <div class="div-user">
-                    <input type="password" name="password" id="password" required class="label">
-                    <span>Password</span>
-                </div>
-                <div class="syarat">
-                    <input type="checkbox" name="syarat" id="syarat">
-                    <label for="syarat">Menyetujui kebijakan privasi</label>
-                </div>
-                <div class="button">
-                    <button type="submit" name="masuk" required>Masuk</button>
-                    <a href="daftar.php">Daftar</a>
-                </div>
-                <?php 
-                if (isset($erorS)) {
-                    echo '
-                    
+            <p>Selamat datang di MyMouse</p>
+            <!-- Input Masuk Mulai -->
+            <div class="div-user">
+                <input type="text" name="username" id="username" required class="label">
+                <span>Username</span>
+            </div>
+            
+            <div class="div-user">
+                <input type="password" name="password" id="password" required class="label">
+                <span>Password</span>
+            </div>
+
+            <div class="button">
+                <button type="submit" name="masuk" required>Masuk</button>
+                <a href="daftar.php">Daftar</a>
+            </div>
+            <!-- input Masuk Selesai -->
+            
+            <?php 
+            // Menampilkan jika salah Mulai
+            if (isset($erorS)) {
+                echo '                
                     <p class="alert"><img src="../gambar/icon/Warning.png" alt="">Username / Pasword salah</p>
                     ';
-                } else if (isset($erorP)) {
-                    echo '
+            } else if (isset($erorP)) {
+                echo '
                     <p class="alert"><img src="../gambar/icon/Warning.png" alt="">Pasword salah</p>
                     ';
-                }
-                ?>
-                <div class="watermarkIcon">
-                    <a href="https://www.facebook.com/mymouseofc/" target="_blank"><img src="../gambar/facebook1.png"
-                            alt=""></a>
-                    <a href="https://twitter.com/curvast" target="_blank"><img src="../gambar/twiter1.png" alt=""></a>
-                    <a href="https://www.instagram.com/mymouseofc/" target="_blank"><img src="../gambar/instagram1.png"
-                            alt=""></a>
-                </div>
-            </form>
+            }
+            // Menampilkan jika salah Selesai
+            ?>
+
+            <!-- Watermark logo Mulai -->
+            <div class="watermarkIcon">
+                <a href="https://www.facebook.com/mymouseofc/" target="_blank"><img src="../gambar/facebook1.png"
+                        alt=""></a>
+                <a href="https://twitter.com/curvast" target="_blank"><img src="../gambar/twiter1.png" alt=""></a>
+                <a href="https://www.instagram.com/mymouseofc/" target="_blank"><img src="../gambar/instagram1.png"
+                        alt=""></a>
+            </div>
+            <!-- Watermark Logo Selesai -->
+
+        </form>
+        <!-- Wrapper Masuk Selesai -->
     </div>
+    <!-- Container Selesai -->
 </body>
 </html>

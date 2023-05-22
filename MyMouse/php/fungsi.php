@@ -212,9 +212,9 @@ function filter($brand, $dariHar, $sampaiHar, $filDiskon, $filJenis) {
 }
 // Fungsi Pencarian dan Kategori/Filter Mulai
 
-// function konek() {
-//     return $koneksi = koneksi1();
-// }
+function konek() {
+    return $koneksi = koneksi1();
+}
 
 
 function daftar($data) {
@@ -276,11 +276,11 @@ function hapusKProduk($user, $nama) {
     return $result;
 }
 
-function tambahPesan($user,$nama,$harga,$jumlah,$warna,$deskripsi,$alamat,$pos,$hp,$kurir,$bayar,$total,$gambar,$namaKurir,$prov) {
+function tambahPesan($user,$nama,$harga,$jumlah,$warna,$deskripsi,$alamat,$pos,$hp,$kurir,$bayar,$total,$gambar,$namaKurir,$prov,$hargaAwal) {
     $koneksi = koneksi1();
     $temp = $namaKurir . " Rp" . number_format($kurir,0,',','.');
     $tempAlamat = $prov .", ". $alamat; 
-    $sql ="INSERT INTO `tbpesanan`(`user`, `nama`, `harga`,`totalHar`, `jumlah`,`warna`, `catatan`,`gambar` ,`alamat`, `pos`, `hp`, `Hkurir`,`Pembayaran`) VALUES ('$user','$nama','$harga','$total','$jumlah','$warna','$deskripsi','$gambar','$tempAlamat','$pos','$hp','$temp','$bayar')";
+    $sql ="INSERT INTO `tbpesanan`(`user`, `nama`,`harga_awal`, `harga`,`totalHar`, `jumlah`,`warna`, `catatan`,`gambar` ,`alamat`, `pos`, `hp`, `Hkurir`,`Pembayaran`) VALUES ('$user','$nama','$hargaAwal','$harga','$total','$jumlah','$warna','$deskripsi','$gambar','$tempAlamat','$pos','$hp','$temp','$bayar')";
     $result = $koneksi->query($sql);
     return $result;
 }
@@ -323,11 +323,12 @@ function tambahPenjualan($tanggal, $user){
     //     $koneksi->query($sql2);
     foreach($result as $data){
         $nama = $data['nama'];
+        $hargaAwal = $data['harga_awal'];
         $harga = $data['totalHar'];
         $hargaBersih = $data['harga'];
         $jumlah = $data['jumlah'];
         $catatan = $data['catatan'];
-        $sql2= "INSERT INTO `tbpenjualan`(`user`, `nama`, `harga_bersih`,`harga`,`jumlah`, `catatan`) VALUES ('$user','$nama','$hargaBersih','$harga','$jumlah','$catatan')";
+        $sql2= "INSERT INTO `tbpenjualan`(`user`, `nama`,`harga_awal`, `harga_bersih`,`harga`,`jumlah`, `catatan`) VALUES ('$user','$nama','$hargaAwal','$hargaBersih','$harga','$jumlah','$catatan')";
         $koneksi->query($sql2);
     }
     // return $result2;
@@ -477,7 +478,8 @@ function ambilLaporan() {
 
 function ambilPenjualan() {
     $koneksi = koneksi1();
-    $sql ="SELECT sum(DISTINCT harga_bersih) as pendapatan,  sum(jumlah) as  terjual  FROM tbpenjualan" ;
+    // $sql ="SELECT  sum(DISTINCT harga_bersih ) as pendapatan,  sum(jumlah) as  terjual  FROM tbpenjualan ORDER BY tanggal" ;
+    $sql ="SELECT sum( harga_awal) as pendapatan,  sum(jumlah) as  terjual  FROM tbpenjualan ORDER BY tanggal" ;
     $result = $koneksi->query($sql);
     return $result;
 }

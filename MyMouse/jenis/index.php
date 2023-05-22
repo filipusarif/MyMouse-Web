@@ -12,6 +12,7 @@ session_start();
 require '../php/fungsi.php';
 $user = "Tamu";
 $role = "Pengunjung";
+// Cek Session User Mulai
 if(isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
     $role = "Pengguna";
@@ -19,6 +20,7 @@ if(isset($_SESSION['user'])) {
     $user = $_SESSION['admin'];
     $role = "Admin";
 }
+// Cek Session User selesai
 ?>
 
 <!DOCTYPE html>
@@ -143,22 +145,24 @@ if(isset($_SESSION['user'])) {
         </div>
     </header>
     <!-- header End -->
-    <a href="#product" class="keAtas"><img src="../gambar/keatas.png" alt="keatas" width="30px" height="auto"></a>
+    <a href="#top" class="keAtas1" ><img src="../gambar/keatas.png" alt="keatas" width="30px" height="auto"></a>
 
 
-
+    <!-- Background Fixed Mulai -->
     <section id="product" class="product1">
-        <!-- <img src="../gambar/effectmouse2.jpg" alt=""> -->
         <div class="contentProduct1">
             <h1>What's up <span class="blue"> Everyone</span></h1>
         </div>
     </section>
+    <!-- Background Fixed Selesai -->
+
+    <!-- Konten Utama Mulai -->
     <section id="productPage2" class="product2">
         <h1 class="jenisHead">Jenis Jenis Mouse</h1>
         <p class="jenis">Jenis Mouse terbagi menjadi 2 yaitu dengan</p>
         <h3 class="jenisPort">1. Jenis portnya</h3>
 
-
+        <!-- Container Card1 Mulai -->
         <div class="containerPort">
             <div class="cardPort fade">
                 <img class="gam" src="../gambar/serial.jpg" alt="Mouse Serial">
@@ -202,9 +206,10 @@ if(isset($_SESSION['user'])) {
                 </div>
             </div>
         </div>
-
+        <!-- Container Card1 Selesai -->
 
         <h3 class="jenisSensor">2. Jenis sensornya</h3>
+        <!-- Container Card2 Mulai -->
         <div class="containerSensor">
             <div class="cardPort fade">
                 <img class="gam" src="../gambar/mekanikal.jpg" alt="Mouse Serial">
@@ -240,7 +245,9 @@ if(isset($_SESSION['user'])) {
                 </div>
             </div>
         </div>
+        <!-- Container Card2 Selesai -->
 
+        <!-- Table Mulai -->
         <h1 class="headKel">kekurangan dan kelebihan mouse</h1>
         <div class="containerTable">
             <table class="tabelKel">
@@ -324,48 +331,12 @@ if(isset($_SESSION['user'])) {
                 </tr>
             </table>
         </div>
+        <!-- Table Selesai -->
 
-        <!-- <h3 class="rec">Rekomendasi</h3>
-        <div class="containeritems">
-            <button class="carditems"
-                href="../toko/"
-                data-target="#modal1"
-                target="_blank">
-                <img src="../gambar/laser.jpg" alt="">
-                <p>
-                    Logitech MX Master 2S</p>
-            </button>
-            <a class="carditems" href="https://fantech.id/product/mouse-gaming/mouse-gaming-xd-series/helios-xd3"
-                target="_blank">
-                <img src="../gambar/rec 2.jpg" alt="">
-                <p>Fantech
-                    Helios XD3</p>
-            </a>
-            <a class="carditems" href="https://rexus.id/language/en/produk/rexus-wireless-gaming-mouse-109/"
-                target="_blank">
-                <img src="../gambar/rec3.jpg" alt="">
-                <p>Rexus Xierra RX 109</p>
-            </a>
-            <a class="carditems"
-                href="https://www.logitech.com/en-us/products/mice/mx-vertical-ergonomic-mouse.910-005447.html"
-                target="_blank">
-                <img src="../gambar/rec4.jpg" alt="">
-                <p>Logitech MX Vertical</p>
-            </a>
-            <a class="carditems" href="https://www.logitech.com/id-id/products/mice/m575-ergo-wireless-trackball.html"
-                target="_blank">
-                <img src="../gambar/rec5.jpg" alt="">
-                <p>Logitech Ergo M575</p>
-            </a>
-            <a class="carditems" href="https://www.razer.com/gaming-mice/razer-deathadder-v2" target="_blank">
-                <img src="../gambar/rec1.jpg" alt="">
-                <p>Razer Deathadder</p>
-            </a>
-        </div> -->
     </section>
+    <!-- Konten Utama Selesai -->
 
-    <!-- footer -->
-
+    <!-- footer Mulai -->
     <footer id="footerHome">
         <div class="containerFoot">
             <ul class="footMenu">
@@ -415,11 +386,16 @@ if(isset($_SESSION['user'])) {
                     src="../gambar/sosmed/linkedin.png" alt="li"></a>
         </div>
     </footer>
+    <!-- Footer Selesai -->
+
+    <!-- Link File Javascript Mulai -->
     <script src="../javascript/slider.js"></script>
     <script src="../javascript/notifikasi.js"></script>
     <script src="../javascript/dropdown.js" ></script>
     <script src="../javascript/main.js"></script>
-
+    <!-- Link File Javascript Selesai -->
 </body>
 
 </html>
+
+<!-- Develop By Filipus Arif -->

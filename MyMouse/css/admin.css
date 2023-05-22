@@ -48,14 +48,21 @@ html {
     background-color: #333333;
     border-radius: 50px;
 }
-
-
+/* 
+.keAtas {
+    margin-top: 10%;
+    position: fixed;
+    right: 0px;
+    bottom: 20px;
+    z-index: 99;
+} */
 
 /* header */
 
 .logo {
     /* visibility: hidden; */
     transform: translateX(-35px);
+    /* background-color: #007acc; */
 }
 
 /* main */

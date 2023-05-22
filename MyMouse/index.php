@@ -25,7 +25,6 @@ if(isset($_SESSION['user'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,16 +36,15 @@ if(isset($_SESSION['user'])) {
     <link rel="icon" href="gambar/miniLogo.png">
     <title>MyMouse</title>
 </head>
-
 <body>
     <!-- Header Mulai -->
     <header class="container">
-        <a href="#homePage" class="logo">
+        <a href="#" class="logo">
             <img class="logo" src="gambar/logoWeb.png" alt="Mymouse" width="180px">
         </a>
         <nav class="">
             <ul class="navigation ">
-                <li><a href="#homePage" class="aktif hover" >beranda</a></li>
+                <li><a href="#" class="aktif hover" >beranda</a></li>
                 <li><button id="btnDrop1" class="hover">Tetikus</button>
                     <ul class="dropdown1" id="drop1">
                         <li><a href="#definitionPage">pengertian</a></li>
@@ -147,7 +145,7 @@ if(isset($_SESSION['user'])) {
         </div>
     </header>
     <!-- Header Selesai -->
-    <a href="#homePage" class="keAtas"><img src="gambar/keatas.png" alt="keatas" width="30px" height="auto"></a>
+    <a href="#" class="keAtas"><img src="gambar/keatas.png" alt="keatas" width="30px" height="auto"></a>
 
     <!-- Home Page Mulai -->
     <section id="homePage" class="home">
@@ -156,7 +154,7 @@ if(isset($_SESSION['user'])) {
             <div class="col-2">
                 <h3>Welcome to <span class="blue">My</span>Mouse</h3>
                 <h1><span class="blue">OUR</span> SECOND <br> HANDS</h1>
-                <p> MyMouse merupakan website yang membahas tentang Mouse, dan juga berisi pembahasan seputar mouse.
+                <p> MyMouse merupakan website menyediakan mouse dari berbagai brand serta membahas tentang Mouse, dan juga berisi pembahasan seputar mouse.
                     dari
                     pengertian, sejarah, hingga jenis dari mouse. dengan adanya MyMouse diharapkan dapat membantu orang
                     yang
@@ -176,10 +174,12 @@ if(isset($_SESSION['user'])) {
             </div>
             <div class="col-1">
                 <img src="gambar/mouseHome.png" alt="Mouse">
-                <!-- <div class="circle"></div> -->
             </div>
         </div>
     </section>
+    <!-- Home page Selesai -->
+
+    <!-- Definition Page Mulai -->
     <section id="definitionPage" class="about1">
         <h1 class="heading fade">TETIKUS</h1>
         <div class="row2">
@@ -200,8 +200,12 @@ if(isset($_SESSION['user'])) {
             </div>
         </div>
     </section>
+    <!-- Definition Page Selesai -->
+
+    <!-- History Page Mulai -->
     <section id="historyPage" class="about2">
         <h1 class="heading fade">SEJARAH TETIKUS</h1>
+        <!-- Content mulai -->
         <div class="row3">
             <div class="col-5 right">
             <!-- <object data="gambar/penemuMouse.jpg" type=""
@@ -233,36 +237,40 @@ if(isset($_SESSION['user'])) {
                 <img src="gambar/penemu.png" alt="">
             </div>
         </div>
-    </section>
-    
-    <div class="container-wave">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="wave1">
-        <path fill="#282828" fill-opacity="1" d="M0,224L40,208C80,192,160,160,240,154.7C320,149,400,171,480,197.3C560,224,640,256,720,256C800,256,880,224,960,202.7C1040,181,1120,171,1200,181.3C1280,192,1360,224,1400,240L1440,256L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
-    </svg>
-    <div class="wave-content">
-        <a href="/">
-            <img src="gambar/logoWeb.png" alt="">
-        </a>
-        <div class="info-sosmed">
-            <a href="https://www.facebook.com/mymouseofc/" target="_blank"><img src="gambar/sosmed/facebook.png"
-                    alt="fb"></a>
-            <a href="https://twitter.com/curvast" target="_blank"><img src="gambar/sosmed/twitter.png" alt="twr"></a>
-            <a href="https://www.instagram.com/mymouseofc/" target="_blank"><img src="gambar/sosmed/instagram.png"
-                    alt="ig"></a>
-            <a href="https://github.com/filipusarif" target="_blank"><img src="gambar/sosmed/github.png" alt="gt"></a>
-            <a href="https://discord.gg/TRsCsN86mB" target="_blank"><img src="gambar/sosmed/discord.png" alt="dc"></a>
-            <a href="https://www.linkedin.com/in/filipus-arif-kristiyan/" target="_blank"><img
-                    src="gambar/sosmed/linkedin.png" alt="li"></a>
+        <!-- Content Selesai -->
+
+        <!-- Wave mulai -->
+        <div class="container-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="wave1">
+                <path fill="#282828" fill-opacity="1" d="M0,224L40,208C80,192,160,160,240,154.7C320,149,400,171,480,197.3C560,224,640,256,720,256C800,256,880,224,960,202.7C1040,181,1120,171,1200,181.3C1280,192,1360,224,1400,240L1440,256L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
+            </svg>
+            <div class="wave-content">
+                <a href="#">
+                    <img src="gambar/logoWeb.png" alt="">
+                </a>
+                <div class="info-sosmed">
+                    <a href="https://www.facebook.com/mymouseofc/" target="_blank"><img src="gambar/sosmed/facebook.png"
+                            alt="fb"></a>
+                    <a href="https://twitter.com/curvast" target="_blank"><img src="gambar/sosmed/twitter.png" alt="twr"></a>
+                    <a href="https://www.instagram.com/mymouseofc/" target="_blank"><img src="gambar/sosmed/instagram.png"
+                            alt="ig"></a>
+                    <a href="https://github.com/filipusarif" target="_blank"><img src="gambar/sosmed/github.png" alt="gt"></a>
+                    <a href="https://discord.gg/TRsCsN86mB" target="_blank"><img src="gambar/sosmed/discord.png" alt="dc"></a>
+                    <a href="https://www.linkedin.com/in/filipus-arif-kristiyan/" target="_blank"><img
+                            src="gambar/sosmed/linkedin.png" alt="li"></a>
+                </div>
+                <a href="toko/">Belanja di MyMouse<img src="gambar/icon/Kiri.png" alt=""></a>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="wave2">
+                <path fill="#282828" fill-opacity="1" d="M0,128L60,122.7C120,117,240,107,360,106.7C480,107,600,117,720,133.3C840,149,960,171,1080,181.3C1200,192,1320,192,1380,192L1440,192L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
+            </svg>
         </div>
-        <a href="toko/">Belanja di MyMouse<img src="gambar/icon/Kiri.png" alt=""></a>
-    </div>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="wave2">
-        <path fill="#282828" fill-opacity="1" d="M0,128L60,122.7C120,117,240,107,360,106.7C480,107,600,117,720,133.3C840,149,960,171,1080,181.3C1200,192,1320,192,1380,192L1440,192L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
-    </svg>
-</div>
+        <!-- Wave Selsai -->
+    </section>
+    <!-- History Page Selesai -->
+
+    <!-- Function Page Mulai -->
     <section id="functionPage" class="about3">
-    
-        <!-- <img src="gambar/bgfungsi.jpg" alt="" width="auto" height="100%"> -->
         <div class="containerFung">
             <h1 class="fade">FUNGSI</h1>
             <div class="containerElement right">
@@ -295,6 +303,9 @@ if(isset($_SESSION['user'])) {
             </div>
         </div>
     </section>
+    <!-- Function Page Selesai -->
+
+    <!-- Footer Mulai -->
     <footer id="footerHome">
         <div class="containerFoot">
             <ul class="footMenu">
@@ -342,10 +353,15 @@ if(isset($_SESSION['user'])) {
                     src="gambar/sosmed/linkedin.png" alt="li"></a>
         </div>
     </footer>
+    <!-- Footer Selesai -->
+    
+    <!-- Link File Javascript Mulai -->
     <script src="javascript/slider.js"></script>
     <script src="javascript/notifikasi.js"></script>
     <script src="javascript/dropdown.js" ></script>
     <script src="javascript/main.js"></script>
+    <!-- Link File Javascript Selesai -->
 </body>
 
 </html>
+<!-- Develop By Filipus Arif -->

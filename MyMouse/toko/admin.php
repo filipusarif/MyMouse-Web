@@ -10,10 +10,12 @@ File : Admin.php
 <?php 
 session_start();
 require "../php/fungsi.php";
+// Cek Session Mulai
 if(!isset($_SESSION['admin'])) {
     header("location: index.php");
     exit;
 }
+// Cek Session Selesai
 $user = $_SESSION['admin'];
 $role = "admin";
 
@@ -32,8 +34,9 @@ $role = "admin";
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>MyMouse ~ Admin</title>
 </head>
+
 <body>
-<!-- Header Mulai -->
+    <!-- Header Mulai -->
     <header class="container">
         <a href="../" class="logo">
             <img class="logo" src="../gambar/logoWeb.png" alt="Mymouse" width="180px">
@@ -113,17 +116,22 @@ $role = "admin";
             <span></span>
         </div>
     </header>
-
-    <!-- <a href="#homePage" class="keAtas"><img src="../gambar/keatas.png" alt="keatas" width="30px" height="auto"></a> -->
-    <?php 
+    <!-- Header Selesai -->
+    <a href="#" class="keAtas"><img src="../gambar/keatas.png" alt="keatas" width="30px" height="auto"></a>
+    
+    <?php
+    // Pembagian Halaman Mulai
     if(isset($_GET['tambahProduk'])){
         halamanTambahProduk($user,$role,$foto);
     }else {
         halamanAdmin($user,$role,$foto);
     }
+    // Pembagian Halaman Selesai
     
+    // Fungsi Halaman Tambah Produk Mulai
     function halamanTambahProduk($user,$role,$foto){?>
     <section id="main">
+        <!-- Side Bar Mulai -->
         <div class="side-bar">
             <div class="profile">
                 <img src="../gambar/pp/<?= $foto ?>" alt="" class="pp" title="<?= $user ?>"></li>
@@ -140,6 +148,9 @@ $role = "admin";
                             alt=""></a>
             </div>
         </div>
+        <!-- Side Bar Selesai -->
+
+        <!-- Konten Utama Mulai -->
         <form action="../php/tambahProduk.php" method="post" class="container-input" enctype="multipart/form-data">
             <div class="kiri">
                 <img src="../gambar/pp/user.jpg" alt="">
@@ -154,10 +165,15 @@ $role = "admin";
                     <select name="brand" id="brand" required>
                         <option value="logitech">Logitech</option>
                         <option value="Razer">Razer</option>
-                        <option value="robot">Robot</option>
-                        <option value="Taffware">Taffware</option>
                         <option value="SteelSeries">SteelSeries</option>
                         <option value="Fantech">Fantech</option>
+                        <option value="Rexus">Rexus</option>
+                        <option value="Hyperx">Hyperx</option>
+                        <option value="Glorious">Glorious</option>
+                        <option value="Corsair">Corsair</option>
+                        <option value="Roccat">Roccat</option>
+                        <option value="robot">Robot</option>
+                        <option value="Taffware">Taffware</option>
                     </select>
                     <label for="harga">Harga</label>
                     <input type="number" name="harga" id="harga" required placeholder="300000">
@@ -189,15 +205,19 @@ $role = "admin";
                 </div>
             </div>
         </form>
+        <!-- Konten Utama Selesai -->
     </section>
     <?php
     };
+    // Fungsi Tambah Produk Selesai
     
+    // Fungsi Halaman Admin Mulai
     function halamanAdmin($user,$role,$foto){
     ?>
     <section id="home" >
-    <div class="side-bar">
-    <div class="profile">
+        <!-- Side Bar Mulai -->
+        <div class="side-bar">
+            <div class="profile">
                 <img src="../gambar/pp/<?= $foto ?>" alt="" class="pp" title="<?= $user ?>"></li>
                 <h1><?= $user ?></h1>
             </div>
@@ -212,17 +232,21 @@ $role = "admin";
                             alt=""></a>
             </div>
         </div>
+        <!-- Side Bar Selesai -->
+
+        <!-- Konten Utama Mulai -->
         <div class="container-content">
             <h1>Admin</h1>
             <?php 
             $penjualan = mysqli_fetch_assoc(ambilPenjualan());
             $pengguna = ambilPengguna();
             ?>
+            <!-- Container Laporan Card Mulai -->
             <div class="container-card">
                 <div class="card">
                     <div class="bagian-kiri">
                         <p>pengguna</p>
-                        <h1><?= $pengguna ?></h1>
+                        <h1><?= number_format($pengguna,0,",",".")  ?></h1>
                         <p>total pengguna</p>
                     </div>
                     <div class="bagian-kanan">
@@ -232,7 +256,7 @@ $role = "admin";
                 <div class="card">
                     <div class="bagian-kiri">
                         <p>terjual</p>
-                        <h1><?= $penjualan['terjual'] ?></h1>
+                        <h1><?= number_format($penjualan['terjual'],0,",",".")  ?></h1>
                         <p>Produk terjual</p>
                     </div>
                     <div class="bagian-kanan">
@@ -250,138 +274,154 @@ $role = "admin";
                     </div>
                 </div>
             </div>
+            <!-- Container Laporan Card Selesai -->
+
+            <!-- Diagram dan Riwayat Pembelian Mulai -->
             <div class="main-content">
-                    <div class="diagram">
-                        <div class="diagram1">
-                            <h1>Laporan Bulanan</h1>
-                            <canvas id="myChart" ></canvas>
-                        </div>
-                        <div class="diagram2">
-                            <h1>lapora produk terjual</h1>
-                            <canvas id="produkChart" ></canvas>
-                        </div>
+                <div class="diagram">
+                    <div class="diagram1">
+                        <h1>Laporan Bulanan</h1>
+                        <canvas id="myChart" ></canvas>
                     </div>
-                    <h1 class="head">Riwayat penjualan</h1>
-                    <table>
-                        <tr>
-                            <th>no</th>
-                            <th>nama</th>
-                            <th>jumlah</th>
-                            <th>harga</th>
-                            <th>pembeli</th>
-                            <th>tanggal</th>
-                        </tr>
-                        <?php 
-                        $no = 1;
-                        foreach(ambilLaporan() as $laporan){ ?>
-                        <tr>
-                                <td><?= $no ?></td>
-                                <td><?= $laporan['nama'] ?></td>
-                                <td><?= $laporan['jumlah'] ?></td>
-                                <td>Rp<?= number_format($laporan['harga_bersih'],0,",",".")  ?></td>
-                                <td><?= $laporan['user'] ?></td>
-                                <td><?= $laporan['tanggal'] ?></td>
-                        </tr>
-                        <?php 
-                        $no++;
-                        }; ?>
-                    </table>
+                    <div class="diagram2">
+                        <h1>lapora produk terjual</h1>
+                        <canvas id="produkChart" ></canvas>
+                    </div>
+                </div>
+                <h1 class="head">Riwayat penjualan</h1>
+                <table>
+                    <tr>
+                        <th>no</th>
+                        <th>nama</th>
+                        <th>jumlah</th>
+                        <th>harga</th>
+                        <th>pembeli</th>
+                        <th>tanggal</th>
+                    </tr>
+                    <?php 
+                    $no = 1;
+                    foreach(ambilLaporan() as $laporan){ ?>
+                    <tr>
+                        <td><?= $no ?></td>
+                        <td><?= $laporan['nama'] ?></td>
+                        <td><?= $laporan['jumlah'] ?></td>
+                        <td>Rp<?= number_format($laporan['harga_awal'],0,",",".")  ?></td>
+                        <td><?= $laporan['user'] ?></td>
+                        <td><?= $laporan['tanggal'] ?></td>
+                    </tr>
+                    <?php 
+                    $no++;
+                    }; ?>
+                </table>
                 <?php 
+                // Mengambil data Laporan Bulanan Mulai
                 foreach (ambilBulan() as $data){
-                $bulan[] = $data['bulan'];
-                $total[] = $data['total'];
+                    $bulan[] = $data['bulan'];
+                    $total[] = $data['total'];
                 };
+                // Mengambil data Laporan Bulanan Selesai
+
+                // Mengambil data Produk terjual Mulai
                 foreach(dataPenjualan() as $jual){
                     $produk[] = $jual['nama_produk'];
                     $produkTotal[] = $jual['total_produk'];
                 }
+                // Mengambil data Produk terjual Mulai
                 ?>
             </div>
+            <!-- Diagram dan Riwayat pembelian selesai -->
         </div>
     </section>
-    <script>
-    const ctx = document.getElementById('myChart');
-    const produk = document.getElementById('produkChart');
-            
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-        labels: <?php echo json_encode($bulan) ?>,
-        datasets: [{
-            label: 'laporan bulanan MyMouse',
-            data: <?php echo json_encode($total) ?>,
-            borderWidth: 1,
-            backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 205, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)'
-        ],
-        borderColor: [
-        'rgb(255, 99, 132)',
-        'rgb(255, 159, 64)',
-        'rgb(255, 205, 86)',
-        'rgb(75, 192, 192)',
-        'rgb(54, 162, 235)',
-        'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)'
-        ],
-        }]
-        },
-        options: {
-        scales: {
-            y: {
-            beginAtZero: true
-            }
-        }
-        }
-    });
 
-    new Chart(produk, {
-        type: 'doughnut',
-        data: {
-        labels: <?php echo json_encode($produk) ?>,
-        datasets: [{
-            label: 'laporan Produk',
-            data: <?php echo json_encode($produkTotal) ?>,
-            borderWidth: 1,
-            backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 205, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)'
-        ],
-        borderColor: [
-        'rgb(255, 99, 132)',
-        'rgb(255, 159, 64)',
-        'rgb(255, 205, 86)',
-        'rgb(75, 192, 192)',
-        'rgb(54, 162, 235)',
-        'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)'
-        ],
-        }]
-        },
-        options: {
-        scales: {
-            y: {
-            beginAtZero: true
+    <script>
+        const ctx = document.getElementById('myChart');
+        const produk = document.getElementById('produkChart');
+                
+        // Diagram Laporan Bulanan Mulai
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+            labels: <?php echo json_encode($bulan) ?>,
+            datasets: [{
+                label: 'laporan bulanan MyMouse',
+                data: <?php echo json_encode($total) ?>,
+                borderWidth: 1,
+                backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+            ],
+            }]
+            },
+            options: {
+            scales: {
+                y: {
+                beginAtZero: true
+                }
             }
-        }
-        }
-    });
+            }
+        });
+        // Diagram Laporan Bulanan Selesai
+
+        // Diagram laporan Terjual Mulai
+        new Chart(produk, {
+            type: 'doughnut',
+            data: {
+            labels: <?php echo json_encode($produk) ?>,
+            datasets: [{
+                label: 'laporan Produk',
+                data: <?php echo json_encode($produkTotal) ?>,
+                borderWidth: 1,
+                backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+            ],
+            }]
+            },
+            options: {
+            scales: {
+                y: {
+                beginAtZero: true
+                }
+            }
+            }
+        });
+        // Diagram Laporan Terjual Selesai
     </script>
     <?php
     };
+    // Fungsi Halaman Admin Selesai
     ?>
-     <!-- footer  Mulai-->
-     <footer id="footerHome">
+
+    <!-- footer  Mulai-->
+    <footer id="footerHome">
         <div class="containerFoot">
             <ul class="footMenu">
                 <li><a href="../"><img src="../gambar/logoWeb.png" alt="MyMouse" width="150px"></a></li>
@@ -431,8 +471,12 @@ $role = "admin";
         </div>
     </footer>
     <!-- Footer Selesai -->
+
+    <!-- Link File Javascript Mulai -->
     <script src="../javascript/dropdown.js" ></script>
+    <script src="../javascript/notifikasi.js" ></script>
     <script src="../javascript/toko.js"></script>
     <script src="../javascript/main.js"></script>
+    <!-- Link File Javascript Selesai -->
 </body>
 </html>

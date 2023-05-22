@@ -12,6 +12,7 @@ session_start();
 require '../php/fungsi.php';
 $user = "Tamu";
 $role = "Pengunjung";
+// Cek Session User Mulai
 if(isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
     $role = "Pengguna";
@@ -19,11 +20,11 @@ if(isset($_SESSION['user'])) {
     $user = $_SESSION['admin'];
     $role = "Admin";
 }
+// Cek Session User Mulai
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,7 +37,7 @@ if(isset($_SESSION['user'])) {
 </head>
 
 <body>
-    <!-- Header -->
+    <!-- Header Mulai  -->
     <header class="container">
         <a href="../" class="logo">
             <img class="logo" src="../gambar/logoWeb.png" alt="Mymouse" width="180px">
@@ -142,14 +143,14 @@ if(isset($_SESSION['user'])) {
             <span></span>
         </div>
     </header>
-    <!-- header End -->
-
+    <!-- header Selesai -->
     <a href="#news" class="keAtas"><img src="../gambar/keatas.png" alt="keatas" width="30px" height="auto"></a>
 
-
+    <!-- Kontent Mulai -->
     <section id="news" class="newsPage1">
         <h1 class="newsHeader">berita</h1>
         <div class="containerAll">
+            <!-- Container Card Berita Mulai -->
             <div class="containerNews">
 
                 <div class="newsCard2">
@@ -219,10 +220,12 @@ if(isset($_SESSION['user'])) {
                     </a>
                 </div>
             </div>
+            <!-- Container Card Berita Selesai -->
         </div>
-
     </section>
+    <!-- Konten Selesai -->
 
+    <!-- Footer Mulai -->
     <footer id="footerHome">
         <div class="containerFoot">
             <ul class="footMenu">
@@ -272,10 +275,14 @@ if(isset($_SESSION['user'])) {
                     src="../gambar/sosmed/linkedin.png" alt="li"></a>
         </div>
     </footer>
+    <!-- Footer Selesai -->
+
+    <!-- Link File Javascript Mulai -->
     <script src="../javascript/slider.js"></script>
     <script src="../javascript/notifikasi.js"></script>
     <script src="../javascript/dropdown.js" ></script>
     <script src="../javascript/main.js"></script>
+    <!-- Link File Javascript Selesai -->
 </body>
 
 </html>

@@ -9,30 +9,30 @@ File : pesanan.php
 
 <?php
 session_start();
+require "../php/fungsi.php"; 
 
-require "../php/fungsi.php"; //memanggil file fungsi.php
 $user = "Tamu";
 $role = "Pengunjung";
+// Cek Session User Mulai
 if(isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
     $role = "Pengguna";
-    go($user,$role);
 } else if(isset($_SESSION['admin'])) {
     $user = $_SESSION['admin'];
     $role = "Admin";
-    go($user,$role);
 }else {
     header("location: ../akun/masuk.php");
 }
+// Cek Session User Selesai
 
-function go($user,$role) {
-
-    if(isset($_GET['id'])){
-        $id = $_GET['id'];
-        tambahPenjualan($id,$user);
-        hapusPesanan($id,$user);
-        // header("location: pesanan.php");
-    }
+// Cek Paket diterima Mulai
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    tambahPenjualan($id,$user);
+    hapusPesanan($id,$user);
+    header("location: pesanan.php");
+}
+// Cek Paket diterima Selesai
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,8 +41,8 @@ function go($user,$role) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../gambar/miniLogo.png">
-    <link rel="stylesheet" href="../css/pesanan.css">
     <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/pesan.css">
     <link rel="stylesheet" href="../css/footer.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <title>MyMouse ~ Pesanan</title>
@@ -157,78 +157,82 @@ function go($user,$role) {
         </div>
     </header>
     <!-- header Selesai -->
-    <a href="" class="keAtas"><img src="../gambar/keatas.png" alt="keatas" width="30px" height="auto"></a>
+    <a href="#main" class="keAtas"><img src="../gambar/keatas.png" alt="keatas" width="30px" height="auto"></a>
 
+    <!-- Halaman Utama Mulai -->
     <section id="main">
         <h1>Pesanan</h1>
+        <!-- Container Konten Mulai -->
         <div class="container-all">
             <?php 
+            // Cek keranjang Mulai
             if ( ambilPesanan($user)->fetchColumn() > 0){
+                // Penulangan Card Keranjang Mulai
                 foreach(ambilPesanan($user) as $data) {
-            ?>
-            <div class="container-pesan">
-                <?php 
-                foreach (ambilPesanan1($user,$data['tanggal']) as $row) {
-                ?>
-                <div class="container-atas">
-                    <div class="wrapper-gambar">
-                        <img src="../gambar/brand/<?= $row['gambar'] ?>" alt="">
+                echo ('
+                <div class="container-pesan">');
+                    // Pengulangan Produk Mulai
+                    foreach (ambilPesanan1($user,$data['tanggal']) as $row) {
+                    echo ('
+                    <div class="container-atas">
+                        <div class="wrapper-gambar">
+                            <img src="../gambar/brand/'. $row['gambar'] .'" alt="">
+                        </div>
+                        <div class="wrapper-info">
+                            <h1>'. $row['nama'] .'</h1>
+                            <p>Jumlah : '. $row['jumlah'] .'</p>
+                            <p>Warna : '. $row['warna'] .'</p>
+                            <p>Catatan</p>
+                            <p>'. $row['catatan'] .'</p>
+                        </div>
                     </div>
-                    <div class="wrapper-info">
-                        <h1><?= $row['nama'] ?></h1>
-                        <p>Jumlah : <?= $row['jumlah'] ?></p>
-                        <p>Warna : <?= $row['warna'] ?></p>
-                        <p>Catatan</p>
-                        <p><?= $row['catatan'] ?></p>
+                    ');
+                    $alamat = $row['alamat'];
+                    $pos = $row['pos'];
+                    $metode = $row['Pembayaran'];
+                    $hp = $row['hp'];
+                    $jasa = $row['Hkurir'];
+                    $total = $row['totalHar'];
+                    };?>
+                    <table>
+                        <tr>
+                            <th>Alamat</th>
+                            <th>Kode Pos</th>
+                            <th>Metode Pembayaran</th>
+                            <th>No HP</th>
+                            <th>Kurir</th>
+                        </tr>
+                        <tr>
+                            <td><?= $alamat ?></td>
+                            <td><?= $pos ?></td>
+                            <td><?= $metode ?></td>
+                            <td><?= $hp ?></td>
+                            <td><?= $jasa?></td>
+                        </tr>
+                    </table>
+                    <div class="flex">
+                        <p>Barang yang dalam proses pengiriman tidak dapat dibatalkan</p>
+                        <h1>Rp. <?= number_format($total,0,',','.'); ?></h1>
                     </div>
+                    <a href="?id=<?= $row['tanggal'] ?>" onclick="return confirm('Apakah Paket sudah diterima?')" type="button"
+                            class="sampai">Paket Diterima</a>
                 </div>
-                <?php 
-                $alamat = $row['alamat'];
-                $pos = $row['pos'];
-                $metode = $row['Pembayaran'];
-                $hp = $row['hp'];
-                $jasa = $row['Hkurir'];
-                $total = $row['totalHar'];
-                };
-                // $ongkir = (int) filter_var($jasa, FILTER_SANITIZE_NUMBER_INT);
-                // $awal = strlen((string)$ongkir);
-                // $panjang = $awal + 1;
-                // $kurir = substr($jasa,0,-$panjang);
-                ?>
-                <table>
-                    <tr>
-                        <th>Alamat</th>
-                        <th>Kode Pos</th>
-                        <th>Metode Pembayaran</th>
-                        <th>No HP</th>
-                        <th>Kurir</th>
-                    </tr>
-                    <tr>
-                        <td><?= $alamat ?></td>
-                        <td><?= $pos ?></td>
-                        <td><?= $metode ?></td>
-                        <td><?= $hp ?></td>
-                        <td><?= $jasa?></td>
-                    </tr>
-                </table>
-                <div class="flex">
-                    <p>Barang yang dalam proses pengiriman tidak dapat dibatalkan</p>
-                    <h1>Rp. <?= number_format($total,0,',','.'); ?></h1>
-                </div>
-                <a href="?id=<?= $row['tanggal'] ?>" onclick="return confirm('Apakah Paket sudah diterima?')" type="button"
-                        class="sampai">Paket Diterima</a>
-            </div>
-            <?php };
+                <?php };
             } else {
                 echo ('
-                <div class="belum">
+                <div class="belumPesan tes">
                     <p>belum ada pesanan</p>
                     <a href="index.php">pesan sekarang</a>
                 </div>
                 ');
-            }?>
+            }
+            // Cek Keranjang Selesai
+            ?>
         </div>
+        <!-- Container Konten Selesai -->
     </section>
+    <!-- Halaman Utama Selesai -->
+
     <!-- footer  Mulai-->
     <footer id="footerHome">
         <div class="containerFoot">
@@ -280,25 +284,12 @@ function go($user,$role) {
         </div>
     </footer>
     <!-- Footer Selesai -->
-    <script>
-        // notifikasi Mulai
-        function loadDoc() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("notif").innerHTML = this.responseText;
-            }
-        };
-        xhttp.open("GET", "../php/notifikasi.php", true);
-        xhttp.send();
-        }
-        loadDoc();
-        //notifikasi Selesai
-    </script>
+
+    <!-- Link File Javascript Mulai -->
     <script src="../javascript/main.js"></script>
+    <script src="../javascript/notifikasi.js"></script>
     <script src="../javascript/dropdown.js" ></script>
     <script src="../javascript/notifikasi.js"></script>
-    
+    <!-- Link File Javascript Selesai -->
 </body>
 </html>
-<?php };?>

@@ -283,13 +283,15 @@ body::-webkit-scrollbar-track {
     background-color: var(--blue-color);
     color: var(--text);
     border-radius: 5px;
+    /* z-index: 5; */
+    cursor: pointer;
 }
 
 /* About Page 2 */
 
 #historyPage {
     position: relative;
-    min-height: 100vh;
+    min-height: 120vh;
     width: 100%;
     /* overflow-x: hidden; */
     /* background-image: linear-gradient( #161616, #1d1f24 ); */
@@ -303,9 +305,12 @@ body::-webkit-scrollbar-track {
     width: 100%;
     padding-inline: 10%;
     padding-top:0%;
-    padding-bottom: 18%;
+    /* margin-bottom: 20%; */
     gap: 20px;
     padding-top: 0px;
+    z-index:3;
+    position: relative;
+    /* background-color: #111111; */
 }
 
 .col-5 {
@@ -337,29 +342,22 @@ body::-webkit-scrollbar-track {
     width: 85%;
 }
 
-/* .row3>h1 {
-    position: relative;
-    
-    text-align: center;
-    color: #fff;
-    font-size: 2.3em;
-    margin-bottom: 5%;
-} */
 
 .container-wave {
     width: 100%;
     height: 25vh;
     position: absolute;
-    top: 115em;
-    bottom: -500px;
-    z-index: 9;
+    bottom: 0%;
+    transform: translateY(-125%);
+    z-index: 2;
 }
 
 .wave-content {
     position: absolute;
     width: 100%;
     height: 15vh;
-    z-index: 9;
+    z-index: 99;
+    /* background-color: #111111; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -375,6 +373,7 @@ body::-webkit-scrollbar-track {
     padding: 1px 15px;
     border: 1px solid var(--blue-color);
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .wave-content>a:nth-child(3)>img {
@@ -395,6 +394,7 @@ body::-webkit-scrollbar-track {
     /* transform: ; */
     transform: translateY(-10px);
     width: 100%;
+    z-index: 2;
 }
 
 /* About Page 3 */

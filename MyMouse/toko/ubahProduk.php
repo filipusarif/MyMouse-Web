@@ -10,17 +10,20 @@ File : ubahProduk.php
 <?php 
 session_start();
 require "../php/fungsi.php";
+// Cek Session Admin Mulai
 if(!isset($_SESSION['admin'])) {
     header("location: ../toko/");
     exit;
 }
+// Cek Session Admin Selesai
 $user = $_SESSION['admin'];
 $role = "admin";
-// $tempId = NULL;
+
+// Mengambil Id Mulai
 if(isset($_GET['id'])){
     $id = $_GET['id'];
 }
-
+// Mengambil Id Selesai
 ?>
 
 <!DOCTYPE html>
@@ -73,9 +76,11 @@ if(isset($_GET['id'])){
         <div class="profil">
                 <button onclick="btnTetikus()" id="btnDrop3" class="prof">
                     <?php 
+                    $temp = mysqli_fetch_assoc(ambilAkun($user));
+                    $foto = $temp['profil'];
                     if(isset($_SESSION['admin'])) {
                         echo '
-                        <img src="../gambar/pp/miniLogo.png" alt="" title="'. $user .'">
+                        <img src="../gambar/pp/'.$temp['profil'].'" alt="" title="'. $user .'">
                         ';
                     }
                     ?>
@@ -84,7 +89,7 @@ if(isset($_GET['id'])){
                 <?php 
                     if(isset($_SESSION['admin'])) {
                         echo '
-                        <li><img src="../gambar/pp/miniLogo.png" alt="" class="pp" title="'. $user .'"></li>
+                        <li><img src="../gambar/pp/'.$temp['profil'].'" alt="" class="pp" title="'. $user .'"></li>
                         ';
                     }
                     ?>
@@ -115,10 +120,12 @@ if(isset($_GET['id'])){
         </div>
     </header>
 
-    <!-- <a href="#homePage" class="keAtas"><img src="../gambar/keatas.png" alt="keatas" width="30px" height="auto"></a> -->
-
+    <!-- Halaman Edit Mulai -->
     <section id="edit">
+        <!-- Mengambil Data Yang akan diedit -->
         <?php $data = mysqli_fetch_assoc(ambil1Produk($id)); ?>
+
+        <!-- Form Edit Mulai -->
         <form action="" method="post" class="container-edit edit" enctype="multipart/form-data">
             <div class="kiri">
                 <img src="../gambar/brand/<?= $data['gambar'] ?>" alt="" class="mainGambar">
@@ -171,8 +178,13 @@ if(isset($_GET['id'])){
                 </div>
             </div>
         </form>
+        <!-- Form Edit Selesai -->
+
     </section>
+    <!-- Halaman Edit Selesai -->
+
     <?php
+    // Cek Set Button kirim Mulai
     if(isset($_POST['kirim'])){
         $nama = $_POST['nama'];
         $brand = $_POST['brand'];
@@ -181,6 +193,7 @@ if(isset($_GET['id'])){
         $jenis = $_POST['jenis'];
         $stok = $_POST['stok'];
         $deskripsi = $_POST['deskripsi'];
+        // Melakukan Update
         $update = updateProduk($data['id_produk'],$nama,$brand,$harga,$diskon,$jenis,$data['gambar'],$data['gambar2'],$data['gambar3'],$data['gambar4'],$stok,$deskripsi);
         if (!$update){
             echo '
@@ -198,7 +211,9 @@ if(isset($_GET['id'])){
             ';
         }
     }
+    // Cek Set Button Kirim Selesai
     ?>
+
     <!-- footer  Mulai-->
     <footer id="footerHome">
         <div class="containerFoot">
@@ -250,8 +265,12 @@ if(isset($_GET['id'])){
         </div>
     </footer>
     <!-- Footer Selesai -->
+
+    <!-- Link File Javascript Mulai -->
     <script src="../javascript/dropdown.js" ></script>
+    <script src="../javascript/notifikasi.js" ></script>
     <script src="../javascript/toko.js"></script>
     <script src="../javascript/main.js"></script>
+    <!-- Link File Javascript Selesai -->
 </body>
 </html>

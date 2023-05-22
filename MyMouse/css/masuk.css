@@ -469,3 +469,34 @@ html {
     margin-top: 43px;
     text-align: end;
 }
+
+input[type="checkbox"]{
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: var(--backgrond);
+    border: 1px solid var(--card);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="checkbox"]::after{
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    height: 18px;
+    display: grid;
+    place-items: center;
+    color: var(--blue-color);
+    /* display: none; */
+    visibility: hidden;
+}
+
+input[type="checkbox"]:checked {
+    border: 1px solid var(--blue-color);
+}
+
+input[type="checkbox"]:checked::after{
+    visibility: visible;
+}

@@ -11,10 +11,7 @@ File : daftar.php
 session_start();
 require '../php/fungsi.php';
 
-// if(isset($_SESSION['admin'])){
-//     header("location: index.php");
-//     exit;
-// }
+// Cek Session Login Mulai
 if(isset($_SESSION['user'])){
     header("location: ../");
     exit;
@@ -24,20 +21,27 @@ if(isset($_SESSION['admin'])){
     header("location: ../");
     exit;
 }
+// Cek Session Login Selesai
 
+// If set Button daftar mulai
 if(isset($_POST['daftar'])){
-
-    if(daftar($_POST) > 0) {
-        echo '<script>
-            alert("Berhasil Mendaftarkan Akun");
-            </script>';
+    if(isset($_POST['syarat'])){
+        if(daftar($_POST) > 0) {
+            echo '<script>
+                alert("Berhasil Mendaftarkan Akun");
+                </script>';
+        } else {
+            echo '<script>
+                alert("Gagal Mendaftarkan Akun");
+                </script>';
+        }
     } else {
         echo '<script>
-            alert("Gagal Mendaftarkan Akun");
-            </script>';
+                alert("Silahkan menyetujui kebijakan privasi");
+                </script>';
     }
-
 }
+// If set Button daftar selesai
 ?>
 
 <!DOCTYPE html>
@@ -46,14 +50,17 @@ if(isset($_POST['daftar'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../css/daftar.css"> -->
     <link rel="stylesheet" href="../css/masuk.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="../gambar/miniLogo.png">
     <title>MyMouse ~ Daftar</title>
 </head>
+
 <body>
+    <!-- Container konten mulai -->
     <div class="container">
-    <span class="bg"></span>
+        <span class="bg"></span>
+        <!-- Form Daftar Mulai -->
         <form action="" method="post" class="container-log">
             <div class="log">
                     <a href="../">
@@ -66,12 +73,11 @@ if(isset($_POST['daftar'])){
             <h1>Daftar</h1>
             <p>Selamat datang di MyMouse</p>
 
-            <!-- <label for="username">Username</label><br> -->
             <div class="div-user">
                 <input type="text" name="username" id="username" required class="label">
                 <span>Username</span>
             </div>
-            <!-- <label for="password">Password</label><br> -->
+            
             <div class="div-user">
                 <input type="password" name="password" id="password" required class="label">
                 <span>Password</span>
@@ -80,7 +86,7 @@ if(isset($_POST['daftar'])){
                 <input type="number" name="hp" id="hp" required class="label">
                 <span>No HP</span>
             </div>
-            <!-- <label for="email">Email</label><br> -->
+            
             <div class="div-user">
                 <input type="email" name="email" id="email" required class="label">
                 <span>Email</span>
@@ -101,6 +107,10 @@ if(isset($_POST['daftar'])){
                             alt=""></a>
                 </div>
         </form>
+        <!-- Form Daftar Selesai -->
+
     </div>
+    <!-- Container konten selesai -->
+
 </body>
 </html>

@@ -1,13 +1,6 @@
 <?php 
 session_start();
-
-// if(!isset($_SESSION['user'])) {
-//         header("location: ../toko/index.php");
-//         exit;
-// }
-
-if(isset($_SESSION['user'])) {
-}
+require "../php/fungsi.php";
 
 ?>
 <!DOCTYPE html>
@@ -20,7 +13,6 @@ if(isset($_SESSION['user'])) {
 </head>
 <body style="background-color:#161616;">
 <?php 
-require "../php/fungsi.php";
 
 foreach (ambilData() as $data){
         $tes = "kirim".$data['id_produk'];
@@ -40,14 +32,14 @@ foreach (ambilData() as $data){
                                 tambahKer($user, $nama,$diskon1,$data['diskon'],$data['gambar'],$hargaAkhir,$jumlah,$warna,$catatan);
                                 // header("location: ../toko/index.php"); ?>
                                 <script language ="javascript">
-                                        window.location.href="../toko/index.php";
+                                        window.location.href="../toko/";
                                         // alert('Produk berhasil ditambahkan di keranjang');
                                 </script>
                                 <?php 
                         } else {
                                 ?>
                                 <script language ="javascript">
-                                        window.location.href="../toko/index.php";
+                                        window.location.href="../toko/";
                                         alert('Produk sudah ada di keranjang');
                                 </script>
                                 <?php
@@ -69,14 +61,14 @@ foreach (ambilData() as $data){
                                 tambahKer($user, $nama,$diskon1,$data['diskon'],$data['gambar'],$hargaAkhir,$jumlah,$warna,$catatan);
                                 // header("location: ../toko/index.php"); ?>
                                 <script language ="javascript">
-                                        window.location.href="../toko/index.php";
+                                        window.location.href="../toko/";
                                         // alert('Produk berhasil ditambahkan di keranjang');
                                 </script>
                                 <?php 
                         } else {
                                 ?>
                                 <script language ="javascript">
-                                        window.location.href="../toko/index.php";
+                                        window.location.href="../toko/";
                                         alert('Produk sudah ada di keranjang');
                                 </script>
                                 <?php
@@ -87,8 +79,8 @@ foreach (ambilData() as $data){
                 // header("../toko/index.php");
                 ?>
                         <script language ="javascript">
-                                alert('Silahkan Login terlebih dahulu untuk check out');
-                                window.location.href="../toko/masuk.php";
+                                alert('Silahkan Login terlebih dahulu untuk memesan produk');
+                                window.location.href="../akun/masuk.php";
                         </script>
                 <?php
                 exit;

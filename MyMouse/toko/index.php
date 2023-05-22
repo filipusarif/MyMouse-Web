@@ -9,11 +9,10 @@ File : Index.php
 
 <?php 
 session_start();
-
-
 require "../php/fungsi.php"; //memanggil file fungsi.php
 $user = "Tamu";
 $role = "Pengunjung";
+// Cek Session Mulai
 if(isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
     $role = "Pengguna";
@@ -21,18 +20,19 @@ if(isset($_SESSION['user'])) {
     $user = $_SESSION['admin'];
     $role = "Admin";
 }
+// Cek Session Selesai
 
+// Cek id Mulai
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
     hapusDataProduk($id);
     header("location: index.php");
 }
-
+// Cek id Selesai
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,8 +41,6 @@ if(isset($_GET['id'])) {
     <link rel="stylesheet" href="../css/toko.css">
     <link rel="stylesheet" href="../css/navbar.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- <script defer src="script.js"></script> -->
-    
     <link rel="icon" href="../gambar/miniLogo.png">
     <title>MyMouse ~ Toko</title>
 </head>
@@ -158,6 +156,7 @@ if(isset($_GET['id'])) {
     </header>
     <!-- header Selesai -->
     <a href="#top" class="keAtas"><img src="../gambar/keatas.png" alt="keatas" width="30px" height="auto"></a>
+    
     <!-- Carousel Mulai -->
     <section id="top">
         <div class="slide">
@@ -175,8 +174,7 @@ if(isset($_GET['id'])) {
     </section>
     <!-- Carousel selesai -->
 
-
-<!-- section content Start -->
+    <!-- section content Mulai -->
     <Section id="home">
         <div class="grad"></div>
         <!-- Toko header Mulai -->
@@ -196,21 +194,26 @@ if(isset($_GET['id'])) {
             </div>
         </div>
         <!-- Toko header selesai -->
+
         <!-- Brand logo mulai -->
-        
         <h1 class="Hbrand">BRAND</h1>
-        <div class="brand-card">
-            <a href="?brandL=logitech"><img src="../gambar/card/1.jpg" alt=""></a>
-            <a href="?brandL=Razer"><img src="../gambar/card/2.jpg" alt=""></a>
-            <a href="?brandL=SteelSeries"><img src="../gambar/card/3.jpg" alt=""></a>
-            <a href="?brandL=Fantech"><img src="../gambar/card/4.jpg" alt=""></a>
-            <a href="?brandL=5"><img src="../gambar/card/5.jpg" alt=""></a>
-            <a href="?brandL=6"><img src="../gambar/card/6.jpg" alt=""></a>
-            <a href="?brandL=7"><img src="../gambar/card/7.jpg" alt=""></a>
-            <a href="?brandL=8"><img src="../gambar/card/8.jpg" alt=""></a>
-            <a href="?brandL=9"><img src="../gambar/card/9.jpg" alt=""></a>
+        <div class="container-brand">
+            <div class="brand-card">
+                <a href="?brandL=logitech"><img src="../gambar/card/1.jpg" alt=""></a>
+                <a href="?brandL=Razer"><img src="../gambar/card/2.jpg" alt=""></a>
+                <a href="?brandL=SteelSeries"><img src="../gambar/card/3.jpg" alt=""></a>
+                <a href="?brandL=Fantech"><img src="../gambar/card/4.jpg" alt=""></a>
+                <a href="?brandL=Rexus"><img src="../gambar/card/5.jpg" alt=""></a>
+                <a href="?brandL=Hyperx"><img src="../gambar/card/6.jpg" alt=""></a>
+                <a href="?brandL=Glorious"><img src="../gambar/card/7.jpg" alt=""></a>
+                <a href="?brandL=Corsair"><img src="../gambar/card/8.jpg" alt=""></a>
+                <a href="?brandL=Roccat"><img src="../gambar/card/9.jpg" alt=""></a>
+                <a href="?brandL=Robot"><img src="../gambar/card/10.jpg" alt=""></a>
+                <a href="?brandL=Taffware"><img src="../gambar/card/11.jpg" alt=""></a>
+            </div>
         </div>
         <!-- Brand logo Selesai -->
+
         <!-- Search bar Mulai -->
         <form action="" class="search-bar">
             <input type="search" name="search" id="" placeholder="Cari di MyMouse..">
@@ -218,8 +221,10 @@ if(isset($_GET['id'])) {
         </form>
         <!-- Search bar Selesai -->
             
-        <!-- Filter Mulai -->
+        <!-- Container Konten Utama Mulai -->
         <div class="container-content">
+
+            <!-- Filter Mulai -->
             <form class="container-filter">
                 <h1><img src="../gambar/icon/Options_3.png" alt=""> KATEGORI</h1>
                 <h3>Brand</h3>
@@ -227,10 +232,15 @@ if(isset($_GET['id'])) {
                     <option value="">none</option>
                     <option value="logitech">Logitech</option>
                     <option value="Razer">Razer</option>
-                    <option value="robot">Robot</option>
-                    <option value="Taffware">Taffware</option>
                     <option value="SteelSeries">SteelSeries</option>
                     <option value="Fantech">Fantech</option>
+                    <option value="Rexus">Rexus</option>
+                    <option value="Hyperx">Hyperx</option>
+                    <option value="Glorious">Glorious</option>
+                    <option value="Corsair">Corsair</option>
+                    <option value="Roccat">Roccat</option>
+                    <option value="robot">Robot</option>
+                    <option value="Taffware">Taffware</option>
                 </select>
                 <h3>Harga</h3>
                 <input type="number" name="dariHar" id="" class="dari" min="1" placeholder="Rp. 150.000">
@@ -274,6 +284,7 @@ if(isset($_GET['id'])) {
             <!-- Container Card Mulai -->
             <div class="container-card">
                 <?php 
+                // Isset pencarian dan filter Mulai
                 $hasil = ambilData();
                 if(isset($_GET['sendSearch'])) {
                     $cari = $_GET['search'];
@@ -302,6 +313,7 @@ if(isset($_GET['id'])) {
                     $hasil = all();
                 }
                 $semua = $hasil -> rowCount();
+                // Isset Pencarian dan Filter Selesai
                 ?>
 
                 <div class="container-hasil">
@@ -328,6 +340,8 @@ if(isset($_GET['id'])) {
                     <!-- text pencarian Selesai -->
                     <p> Menampilkan 1-<?= $semua ?> dari <?= $semua ?> hasil<a href="?show=all">show all</a></p>
                 </div>
+
+                <!-- Container Card Mulai -->
                 <div class="containerSh">
                     <?php 
                     foreach ($hasil as $data) {
@@ -349,74 +363,79 @@ if(isset($_GET['id'])) {
                         ');
                     }; ?>
                 </div>
+                <!-- Container Card Selesai -->
             </div>
+            <!-- container card Selesai -->
+
         </div>
-        <!-- container card Selesai -->
+        <!-- Container Konten Utama Selesai -->
+
         <!-- modal Mulai -->
         <?php
         foreach (ambilData() as $data){
             $diskon1 = $data['harga'] - ($data['harga'] * $data['diskon'] / 100);
             $nama = $data['nama'];
-        echo ('
-        <div class="modal" id="modal'.$data['id_produk'].'">
-            <div class="header">
-                <button class="btnc close-modal">&times;</button>
-            </div>
-            <div class="container-data">
-                <div class="container-pesan">
-                    <div class="wrapper-gambar">
-                        <img id="gambar-utama'.$data['id_produk'].'" class="main-gambar" src="../gambar/brand/'.$data['gambar'].'" alt="">
-                        <div class="gambar-kecil">
-                            <img src="../gambar/brand/'.$data['gambar'].'" alt="" onclick ="galery(this,'.$data['id_produk'].')">
-                            <img src="../gambar/subbrand/'.$data['gambar2'].'" alt="" onclick ="galery(this,'.$data['id_produk'].')">
-                            <img src="../gambar/subbrand/'. $data['gambar3'].'" alt="" onclick ="galery(this,'.$data['id_produk'].')">
-                            <img src="../gambar/subbrand/'.$data['gambar4'].'" alt="" onclick ="galery(this,'.$data['id_produk'].')">
-                        </div>
-                    </div>
-                    <div class="wrapper-info">
-                        <h2>'.$data['nama'].'</h2>
-                        <p>Terjual '.$data['terjual'].'</p>
-                        <h1>Rp.'.number_format($diskon1,2,',','.').'</h1>
-                        <div class="terdiskon">
-                            <p>'.$data['diskon'].'%</p>
-                            <p>Rp.'.number_format($data['harga'],0,',','.').'</p>
-                        </div>
-                        <h3>Atur Jumlah dan Catatan</h3>
-                        <form action="../php/tambahData.php">
-                            <label for"jumlah" class="label">Kuantitas  </label>
-                            <input type="number" name="jumlah" id="jumlah" class="jumlah" min="1" value="1" max="'.$data['stok'].'" required>
-                            <label class="side" for="jumlah">stok : '.$data['stok'].' pcs</label>
-                            <p class="side">maksimal pembelian '.$data['stok'].' pcs</p>
-                            <label for="warna">Warna</label>
-                            <select name="warna" id="warna">
-                            <option value="Putih">Putih</option>
-                            <option value="Hitam">Hitam</option>
-                            </select>
-                            <div class="cat-info">
-                                <input type="text" name="catatan" id="catatan" class="cat" maxlength="100" required></input><br>
-                                <span>Catatan</span>
+            echo ('
+            <div class="modal" id="modal'.$data['id_produk'].'">
+                <div class="header">
+                    <button class="btnc close-modal">&times;</button>
+                </div>
+                <div class="container-data">
+                    <div class="container-pesan">
+                        <div class="wrapper-gambar">
+                            <img id="gambar-utama'.$data['id_produk'].'" class="main-gambar" src="../gambar/brand/'.$data['gambar'].'" alt="">
+                            <div class="gambar-kecil">
+                                <img src="../gambar/brand/'.$data['gambar'].'" alt="" onclick ="galery(this,'.$data['id_produk'].')">
+                                <img src="../gambar/subbrand/'.$data['gambar2'].'" alt="" onclick ="galery(this,'.$data['id_produk'].')">
+                                <img src="../gambar/subbrand/'. $data['gambar3'].'" alt="" onclick ="galery(this,'.$data['id_produk'].')">
+                                <img src="../gambar/subbrand/'.$data['gambar4'].'" alt="" onclick ="galery(this,'.$data['id_produk'].')">
                             </div>
-                            <button type="submit" name="kirim'.$data['id_produk'].'">+ Keranjang</button>
-                            ');
-                            if(isset($_SESSION['admin'])) {
-                                echo '<a href="?id='.$data['id_produk'].'" class="del">hapus</a>';
-                                echo '<a href="ubahProduk.php?id='.$data['id_produk'].'" class="editProduk">ubah</a>';
-                            }
-                            echo '
-                        </form>
-                        
+                        </div>
+                        <div class="wrapper-info">
+                            <h2>'.$data['nama'].'</h2>
+                            <p>Terjual '.$data['terjual'].'</p>
+                            <h1>Rp.'.number_format($diskon1,2,',','.').'</h1>
+                            <div class="terdiskon">
+                                <p>'.$data['diskon'].'%</p>
+                                <p>Rp.'.number_format($data['harga'],0,',','.').'</p>
+                            </div>
+                            <h3>Atur Jumlah dan Catatan</h3>
+                            <form action="../php/tambahData.php">
+                                <label for"jumlah" class="label">Kuantitas  </label>
+                                <input type="number" name="jumlah" id="jumlah" class="jumlah" min="1" value="1" max="'.$data['stok'].'" required>
+                                <label class="side" for="jumlah">stok : '.$data['stok'].' pcs</label>
+                                <p class="side">maksimal pembelian '.$data['stok'].' pcs</p>
+                                <label for="warna">Warna</label>
+                                <select name="warna" id="warna">
+                                <option value="Putih">Putih</option>
+                                <option value="Hitam">Hitam</option>
+                                </select>
+                                <div class="cat-info">
+                                    <input type="text" name="catatan" id="catatan" class="cat" maxlength="100" required></input><br>
+                                    <span>Catatan</span>
+                                </div>
+                                <button type="submit" name="kirim'.$data['id_produk'].'">+ Keranjang</button>
+                                ');
+                                if(isset($_SESSION['admin'])) {?>
+                                    <a href="?id=<?=$data['id_produk']?>" onclick="return confirm('Apakah anda yakin akan menghapus produk ini?')" type="button" class="del">hapus</a><?php
+                                    echo '<a href="ubahProduk.php?id='.$data['id_produk'].'" class="editProduk">ubah</a>';
+                                }
+                                echo '
+                            </form>
+                            
+                        </div>
+                    </div>
+                    <div class="container-deskripsi">
+                        <h1>Deskripsi Produk</h1>
+                        <p>'.nl2br($data['deskripsi']).'</p>
                     </div>
                 </div>
-                <div class="container-deskripsi">
-                    <h1>Deskripsi Produk</h1>
-                    <p>'.nl2br($data['deskripsi']).'</p>
-                </div>
             </div>
-        </div>
-        ';
+            ';
         }; 
         ?>
         <!-- modal Selesai -->
+
         <!-- overlay -->
         <div id="overlay"></div> 
     </Section>
@@ -473,19 +492,14 @@ if(isset($_GET['id'])) {
         </div>
     </footer>
     <!-- Footer Selesai -->
-    <!-- <script src="https://kit.fontawesome.com/eaa244ddf3.js" crossorigin="anonymous"></script> -->
+
+    <!-- Script Checkbox Mulai -->
     <script>
-        // the selector will match all input controls of type :checkbox
-        // and attach a click event handler 
+        // Memilih semua input dengan tipe check box
         $("input:checkbox").on('click', function() {
-        // in the handler, 'this' refers to the box clicked on
         var $box = $(this);
         if ($box.is(":checked")) {
-            // the name of the box is retrieved using the .attr() method
-            // as it is assumed and expected to be immutable
             var group = "input:checkbox[name='" + $box.attr("name") + "']";
-            // the checked state of the group/box on the other hand will change
-            // and the current value is retrieved using .prop() method
             $(group).prop("checked", false);
             $box.prop("checked", true);
         } else {
@@ -493,10 +507,14 @@ if(isset($_GET['id'])) {
         }
         });
     </script>
+    <!-- Script CheckBox Selesai -->
+
+    <!-- Link File Javascript Mulai -->
     <script src="../javascript/main.js"></script>
     <script src="../javascript/notifikasi.js"></script>
     <script src="../javascript/dropdown.js" ></script>
     <script src="../javascript/toko.js"></script>
+    <!-- Link File Javascript Selesai -->
 </body>
 
 </html>
